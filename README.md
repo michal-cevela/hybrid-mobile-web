@@ -10,25 +10,25 @@ To make the frontend development smoother, I got the [**NPM**](http://www.npmjs.
 
 The frontend part then consists of the following packages:
 
-* [*Yeoman*](http://yeoman.io)
+* [Yeoman](http://yeoman.io)
+* [Grunt](http://gruntjs.com)
 * [**Bower**](http://bower.io)
-* [**Grunt**](http://gruntjs.com)
-* [**AngularJS**](http://angularjs.org) v1.2.x (including the [*ui-router*](https://github.com/angular-ui/ui-router) module)
-* [*Twitter Bootstrap*](http://getbootstrap.com) v3.x (including [jQuery](http://jquery.com) as its underlying dependency)
+* [**AngularJS**](http://angularjs.org) v1.2.x (including the [ui-router](https://github.com/angular-ui/ui-router) module)
+* [Twitter Bootstrap](http://getbootstrap.com) v3.x (including [jQuery](http://jquery.com) as its underlying dependency)
 
-Apart from that the main routing logic was designed in a rather generic way in order to take a full advantage of creating so called [*SPA*](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly just by following few simple steps. Furthermore, all can happen without having to completely reload the application which is exactly what I imagine when thinking about a component-oriented web design anyway.
+Apart from that the main routing logic was designed in a rather generic way in order to take a full advantage of creating so called [SPA](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly just by following few simple steps. Furthermore, all can happen without having to completely reload the application which is exactly what I imagine when thinking about a component-oriented web design anyway.
 
 ### 2. Backend
 At the very first stage I started on a crossroad while designing the backend as I was hesitating a bit between picking up an old good Java friend and a new scalable [Meteor.js](https://meteor.com) solution. Well, after considering several technologies that were planned to be involved in the backend, I eventually ended up laying out Java foundations as I found this approach more flexible and also richer in terms of _what_ all can be brought into the whole solution later on and even more importantly _how_ it could be achieved.
 
 To make the backend part both compact and portable among most of the modern application servers and servlet containers, I have utilized the following software tools or frameworks respectively:
 
-* [**Apache CXF**](http://cxf.apache.org) (JAX-WS, JAX-RS)
-* [**MongoDB**](http://www.mongodb.org)
+* [**Apache CXF**](http://cxf.apache.org) ([JAX-WS](http://cxf.apache.org/docs/jax-ws-configuration.html), [JAX-RS](http://cxf.apache.org/docs/jax-rs.html))
 * [**Spring**](http://spring.io)
-* [*Maven*](http://maven.apache.org)
-* [*Jackson*](http://jackson.codehouse.org)
-* [*Swagger*](http://swagger.wordnik.com)
+* [MongoDB](http://www.mongodb.org)
+* [Maven](http://maven.apache.org)
+* [Jackson](http://jackson.codehouse.org)
+* [Swagger](http://swagger.wordnik.com)
 
 To keep modularity in mind, the *Spring* framework was brought into an existing solution as it can be easily integrated with a number of open-source products distributed under the Apache licence. Besides, the support for asynchronous RESTful APIs is already implemented in the project so that new Web 3.0 features are ready to be used when needed.
 
@@ -38,13 +38,13 @@ When it comes to Web Services, both RESTful APIs and a SOAP endpoints are publis
 For some reason I was feeling an affinity to the [Apache Cordova](http://cordova.apache.org) framework when making a decision regarding building the application for the Android platform. This part was, however, a bit tricky and made me thinking for a certain period of time indeed. Obviously the mobile world has its own set of rules that do not always match the rules existing in the enterprise world which was truly challenging to resolve in some moments. Well, this part gave me a proper lesson, no question about that :-)
 
 ### 4. Middleware
-To make the given solution open to a further enterprise integration, [Apache ServiceMix](http://servicemix.apache.org) along with [Apache ActiveMQ](http://activemq.apache.org) were set up appropriately. Having said that not only web clients can communicate with the backend using, for instance, the [*STOMP*](http://stomp.github.io) or [*MQTT*](http://mqtt.org) protocol over [**WebSockets**](http://www.websockets.org). Furthermore, some parts of the business logic can be added on demand using hot deployment which is a great feature when building 100% SOA applications consisting of loosely-coupled components. In this sense ServiceMix can also act as an additional runtime that some business modules can be deployed onto and clients can interact with a server-side logic via RESTful APIs, SOAP services or [MDBs](http://docs.oracle.com/javaee/7/tutorial/doc/ejb-intro003.htm) (Message-Driven Beans). Broadly speaking, such an approach basically taps the [SOA](http://en.wikipedia.org/wiki/Service-oriented_architecture) concept on the shoulder :-)
+To make the given solution open to a further enterprise integration, [Apache ServiceMix](http://servicemix.apache.org) along with [Apache ActiveMQ](http://activemq.apache.org) were set up appropriately. Having said that not only web clients can communicate with the backend using, for instance, the [STOMP](http://stomp.github.io) or [MQTT](http://mqtt.org) protocol over [WebSockets](http://www.websockets.org). Furthermore, some parts of the business logic can be added on demand using hot deployment which is a great feature when building 100% [SOA]((http://en.wikipedia.org/wiki/Service-oriented_architecture)) applications consisting of loosely-coupled components. In this sense ServiceMix can also act as an additional runtime that some business modules can be deployed onto and clients can interact with a server-side logic via RESTful APIs, SOAP services or [MDBs](http://docs.oracle.com/javaee/7/tutorial/doc/ejb-intro003.htm) (Message-Driven Beans). Broadly speaking, such an approach basically taps the SOA concept on the shoulder :-)
 
 ### 5. [BPM](http://en.wikipedia.org/wiki/Business_process_management)
 Even though I am a novice in the BPM (Business Process Management) field, the [Activiti.org](http://activiti.org) framework can be quickly integrated into ServiceMix.
 
 ### 6. Possible improvements
-Given the Twitter Bootstrap, the [*IonicUI*](http://ionicframework.com) library could be a better choice since it has been designed with AngularJS in mind and does not therefore require the jQuery library to be included as a dependency.
+Given the Twitter Bootstrap, the [IonicUI](http://ionicframework.com) library could be a better choice since it has been designed with AngularJS in mind and does not therefore require the jQuery library to be included as a dependency.
 
 As far as an integration stuff is concerned, [Apache Camel](http://camel.apache.org) or [Spring EIP](http://projects.spring.io/spring-integration/) might be worth a further consideration as they both provide a number of useful EIPs (Enterprise Integration Patterns) applicable on the backend.
 
