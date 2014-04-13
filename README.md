@@ -19,7 +19,7 @@ The frontend part then consists of the following packages:
 Apart from that the main routing logic was designed in a rather generic way in order to take a full advantage of creating so called [SPA](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly just by following few simple steps. Furthermore, all can happen without having to completely reload the application which is exactly what I imagine when thinking about a component-oriented web design anyway.
 
 ### 2. Backend
-At the very first stage I started on a crossroad while designing the backend as I was hesitating a bit between picking up an old good Java friend and a new scalable [Meteor.js](https://meteor.com) solution. Well, after considering several technologies that were planned to be involved in the backend, I eventually ended up laying out Java foundations as I found this approach more flexible and also richer in terms of _what_ all can be brought into the whole solution later on and even more importantly _how_ it could be achieved.
+At the very first stage I started on a crossroad while designing the backend as I was hesitating a bit between picking up an old good Java friend and a modern scalable [Meteor.js](https://meteor.com) platform. Well, after considering several technologies that were planned to be involved in the backend, I eventually ended up laying out Java foundations as I found this approach more flexible and also richer in terms of _what_ all can be brought into the whole solution later on and even more importantly _how_ it could be achieved.
 
 To make the backend part both compact and portable among most of the modern application servers and servlet containers, I have utilized the following software tools or frameworks respectively:
 
@@ -48,7 +48,7 @@ Given the Twitter Bootstrap, the [IonicUI](http://ionicframework.com) library co
 
 As far as an integration stuff is concerned, [Apache Camel](http://camel.apache.org) or [Spring EIP](http://projects.spring.io/spring-integration/) might be worth a further consideration as they both provide a number of useful EIPs (Enterprise Integration Patterns) applicable on the backend.
 
-Last but not least, to build the whole application using only one programming language, particularly JavaScript, the [Meteor.js](https://meteor.com) framework would be probably the best choice available to full-stack JavaScript developers these days.
+Last but not least, to build the whole application using only JavaScript syntax, the [Meteor.js](https://meteor.com) platform would be probably the best choice available to full-stack JavaScript developers these days I assume.
 
 ### 7. Inspiration
 
