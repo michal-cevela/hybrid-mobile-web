@@ -1,0 +1,11 @@
+<div ng-controller="FooterCtrl" class="container">
+	<div class="top-10px">
+		<span ng-repeat="link in links" ng-switch="$last">
+			<a ng-href="{{hash}}{{link.path}}">{{link.text}}</a>
+			<span class="left-5px right-5px" ng-switch-when="false">|</span>
+		</span>
+	</div>
+	<div class="top-5px">
+		<small>&copy; 2014</small>
+	</div>
+</div>

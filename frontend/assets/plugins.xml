@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugins>
+<!--
+	cordova plugin add org.apache.cordova.battery-status
+	cordova plugin add org.apache.cordova.camera
+	cordova plugin add org.apache.cordova.console
+	cordova plugin add org.apache.cordova.contacts
+	cordova plugin add org.apache.cordova.device
+	cordova plugin add org.apache.cordova.device-motion
+	cordova plugin add org.apache.cordova.device-orientation
+	cordova plugin add org.apache.cordova.dialogs
+	cordova plugin add org.apache.cordova.file
+	cordova plugin add org.apache.cordova.file-transfer
+	cordova plugin add org.apache.cordova.geolocation	
+	cordova plugin add org.apache.cordova.globalization
+	cordova plugin add org.apache.cordova.media	
+	cordova plugin add org.apache.cordova.media-capture
+	cordova plugin add org.apache.cordova.network-information
+	cordova plugin add org.apache.cordova.splashscreen
+	cordova plugin add org.apache.cordova.vibration
+-->
+<!--
+	<plugin name="App" value="org.apache.cordova.App"/>
+	<plugin name="Device" value="org.apache.cordova.Device"/>
+	<plugin name="Device" value="org.apache.cordova.Console"/>
+	<plugin name="Accelerometer" value="org.apache.cordova.AccelListener"/>
+	<plugin name="Media" value="org.apache.cordova.AudioHandler"/>
+	<plugin name="Battery" value="org.apache.cordova.BatteryListener"/>
+	<plugin name="Camera" value="org.apache.cordova.CameraLauncher"/>
+	<plugin name="Capture" value="org.apache.cordova.Capture"/>
+	<plugin name="Compass" value="org.apache.cordova.CompassListener"/>
+	<plugin name="Contacts" value="org.apache.cordova.ContactManager"/>
+	<plugin name="FileTransfer" value="org.apache.cordova.FileTransfer"/>
+	<plugin name="File" value="org.apache.cordova.FileUtils"/>
+	<plugin name="Geolocation" value="org.apache.cordova.GeoBroker"/>
+	<plugin name="Network Status" value="org.apache.cordova.NetworkManager"/>
+	<plugin name="Notification" value="org.apache.cordova.Notification"/>
+	<plugin name="Storage" value="org.apache.cordova.Storage"/>
+-->
+</plugins>

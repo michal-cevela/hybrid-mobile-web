@@ -1,0 +1,16 @@
+<div>
+	<div class="top-10px">
+		<span class="heading_1">Contact</span>
+	</div>
+	<div ng-switch="error.response">
+		<div ng-switch-when="true">
+			<div class="top-10px red bold">{{error.message}}</div>
+		</div>
+		<div ng-switch-when="false">
+			<div>
+				<contact-form contact-list="contacts" template-ref="" on-load="$log.debug('view/contact.html: <contact-form> loaded.')"/>
+			</div>
+			<crud-links link-list="links" template-ref="" on-load="$log.debug('view/contact.html: <crud-links> loaded.')"/>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<div>
+	<div class="top-10px">
+		<span class="heading_1">Book detail</span>
+	</div>
+	<div class="top-5px">
+		<div class="top-5px">
+			<strong>Name:</strong> {{book.detail.name}}
+		</div>
+		<div class="top-5px">
+			<strong>Publisher:</strong> {{book.detail.publisher}}
+		</div>
+		<div class="top-5px">
+			<strong>Author:</strong> {{book.detail.author.join(", ")}}
+		</div>
+		<div class="top-5px">
+			<strong>Release:</strong> <em>{{book.detail.release | date:'MMMM dd, yyyy'}}</em>
+		</div>
+		<div class="top-5px">
+			<strong>Price:</strong> <em>{{book.detail.price | currency:'$'}}</em>
+		</div>
+		<div class="top-5px">
+			<strong>ISBN:</strong> <em>{{book.detail['ISBN-10']}}</em>
+		</div>
+	</div>
+	<div class="top-10px">
+		<input type="button" value="Add" ng-click="CRUD.create(book.new);" />
+		<input type="button" value="Update" ng-click="CRUD.update(book.updated);" />
+		<input type="button" value="Delete" ng-click="CRUD.remove(book.id);" />
+	</div>
+</div>

@@ -1,0 +1,53 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<context:annotation-config />
+	<context:component-scan base-package="cz.angular.cordova" />
+	
+	<!-- Exception mappers -->
+	<!--bean id="exceptionMapper" class="cz.angular.cordova.ws.provider.ExceptionHandler"/-->
+	
+	<!-- Swagger providers -->
+  	<bean id="apiDeclarationProvider"  class="com.wordnik.swagger.jaxrs.listing.ApiDeclarationProvider"/>
+  	<bean id="resourceListingProvider" class="com.wordnik.swagger.jaxrs.listing.ResourceListingProvider"/>
+	
+	<!-- Swagger API listing resource -->
+  	<bean id="swaggerResourceJSON" class="com.wordnik.swagger.jaxrs.listing.ApiListingResourceJSON"/>
+	
+	<!-- JAXB/XML provider -->
+	<!--bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider"/-->
+	<!--bean id="jaxbJsonProvider" class="cz.angular.cordova.ws.provider.JaxbJsonProvider"/-->
+	<bean id="xmlProvider" class="cz.angular.cordova.ws.provider.XmlProvider"/>
+	
+	<!-- JSONP provider -->
+	<bean id="jsonpProvider" class="cz.angular.cordova.ws.provider.JsonpProvider"/>
+	
+	<!-- JSON provider -->
+	<!-- Notice: Prefix the HTTP response with the ")]}',\n" string to prevent a browser from an injection attack!
+		  Angular $http service will automatically strip off this string before returning the valid JSON response -->
+	<bean id="jsonProvider" class="cz.angular.cordova.ws.provider.JsonProvider">
+		<!--property name="prefix" value=")]}',"/-->
+		<!--property name="ignoreNamespaces" value="true"/-->
+	</bean>
+<!--
+	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.JSONProvider">
+		<property name="dropRootElement" value="true" />
+		<property name="supportUnwrapped" value="true" />
+	</bean>
+-->
+	
+	<!-- Scans the classes for REST resources -->
+	<bean id="swaggerConfig" class="com.wordnik.swagger.jaxrs.config.BeanConfig">
+		<property name="version" value="1.0.0"/>
+		<property name="basePath" value="http://localhost:8080/angular-workshop/api/v1.0"/>
+		<property name="resourcePackage" value="cz.angular.cordova.ws.impl"/>
+		<property name="title" value="RESTful API"/>
+		<property name="contact" value="michal.cevela@gmail.com"/>
+		<property name="scan" value="true"/>
+	</bean>
+</beans>

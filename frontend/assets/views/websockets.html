@@ -1,0 +1,31 @@
+<div>
+	<div class="top-10px">
+		<span class="heading_1">WebSockets</span>
+	</div>
+	<div class="top-10px">
+		Message to send:
+	</div>
+	<div class="top-5px">
+		<div>
+			<textarea style="width:250px; height:100px;" ng-model="msg.send"></textarea>
+		</div>
+<!--
+		<div class="top-5px">
+			<button class="btn-success" ng-click="MQTT.connect()">Connect to MQTT</button>
+			<button class="btn-info" ng-click="MQTT.sendMessage()">Send a message</button>
+			<button class="btn-warning" ng-click="MQTT.disconnect()">Disconnect from MQTT</button>
+		</div>
+-->
+		<div class="top-5px">
+			<button class="btn-success" ng-click="STOMP.connect()">Connect to STOMP</button>
+			<button class="btn-info" ng-click="STOMP.sendMessage()">Send a message</button>
+			<button class="btn-warning" ng-click="STOMP.disconnect()">Disconnect</button>
+		</div>
+	</div>
+	<div class="top-10px">
+		Received messages:
+	</div>
+	<div class="top-5px">
+		<textarea style="width:250px; height:100px;" ng-model="msg.received"></textarea>
+	</div>
+</div>

@@ -1,0 +1,28 @@
+<div ng-switch="User.isSignedIn()">
+	<div ng-switch-when="true" class="top-10px bold red">
+		You are already signed in!
+	</div>
+	
+	<div ng-switch-when="false">
+		<div class="top-10px bold red">
+			Please enter your login details
+		</div>
+		<div class="top-10px">
+			<div class="top-5px width-70px float-left">Username:</div>
+			<div>
+				<input type="text" value="{{login.usr}}" />
+			</div>
+			<div class="clear-both"></div>
+		</div>
+		<div class="top-5px">
+			<div class="top-5px width-70px float-left">Password:</div>
+			<div>
+				<input type="password" value="{{login.pwd}}" />
+			</div>
+			<div class="clear-both"></div>
+		</div>
+		<div class="top-10px">
+			<input type="button" value="Login" ng-click="User.signIn()" />
+		</div>
+	</div>
+</div>

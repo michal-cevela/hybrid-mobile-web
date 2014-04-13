@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>Angular-Workshop Web Services</display-name>
+	
+	<!-- Spring: Context-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			WEB-INF/spring/applicationContext.xml
+			WEB-INF/spring/cxf-ws.xml
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>initializeContextOnStartup</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!--listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener-->
+	
+	<!-- Apache CXF: Transport Servlet -->
+	<servlet>
+		<servlet-name>CXF</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		
+		<!-- Swagger security filter -->
+		<!--init-param>
+			<param-name>swagger.security.filter</param-name>
+			<param-value>cz.angular.cordova.ws.util.ApiAuthorizationFilter</param-value>
+		</init-param-->
+		<!--async-supported>true</async-supported-->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXF</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+</web-app>

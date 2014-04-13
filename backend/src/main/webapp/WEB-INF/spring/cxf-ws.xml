@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	     http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+        http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+		  http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+        http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+   
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+	<!--import resource="classpath:META-INF/cxf/osgi/cxf-extension-osgi.xml"/-->
+	
+	<cxf:bus>
+		<cxf:properties>
+			<entry key="javax.ws.rs.ext.ExceptionMapper" value-ref="ExceptionHandler"/>
+		</cxf:properties>
+		<cxf:features>
+			<cxf:logging/>
+		</cxf:features>
+	</cxf:bus>
+
+	<jaxrs:server id="Bookstore.REST" address="/v1.0">
+		<jaxrs:serviceBeans>
+			<ref bean="BookstoreService"/>
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="xmlProvider"/>
+			<ref bean="jsonProvider"/>
+			<ref bean="jsonpProvider"/>
+		</jaxrs:providers>
+		<jaxrs:extensionMappings>
+			<entry key="xml" value="application/xml"/>
+			<entry key="json" value="application/json"/>
+			<entry key="jsonp" value="application/javascript"/>
+		</jaxrs:extensionMappings>
+	</jaxrs:server>
+
+	<jaxrs:server id="Swagger.REST" address="/swagger">
+		<jaxrs:serviceBeans>
+			<ref bean="swaggerResourceJSON"/>
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="apiDeclarationProvider"/>
+			<ref bean="resourceListingProvider"/>
+		</jaxrs:providers>
+	</jaxrs:server>
+
+	<jaxws:endpoint id="Bookstore.SOAP" address="/soap/bookstore" implementor="#BookstoreService" />
+
+</beans>

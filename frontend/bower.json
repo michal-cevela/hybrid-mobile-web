@@ -1,0 +1,23 @@
+{
+  "name": "Angular-Cordova-Workshop",
+  "version": "1.0.0",
+  "dependencies": {
+    "es5-shim": "~2.3.0",
+    "respond": "~1.4.2",
+    "html5shiv": "~3.7.0",
+    "jquery": "~1.11.0",
+    "bootstrap": "~3.1.1",
+    "angular": "1.2.14",
+    "angular-resource": "1.2.14",
+    "angular-cookies": "1.2.14",
+    "angular-sanitize": "1.2.14",
+    "angular-route": "1.2.14",
+    "fastclick": "~1.0.0",
+    "stomp-websocket": "~2.3.1",
+    "angular-ui-router": "~0.2.10"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.14",
+    "angular-scenario": "1.2.14"
+  }
+}

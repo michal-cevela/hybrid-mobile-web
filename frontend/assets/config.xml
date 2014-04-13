@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="cz.cordova.workshop" version="1.0.0">
+	<name>Android Workshop</name>
+	<description>Cordova Workshop for Android</description>
+	<author email="michal.cevela@google.com">
+		Michal Cevela, Jalubi 135, 687 05, The Czech Republic
+	</author>
+	
+	<content src="index.html"/>
+	<access origin="*"/>
+	
+	<preference name="Fullscreen" value="true"/>
+	<preference name="loglevel" value="DEBUG"/>
+	
+	<!-- iOS -->
+	<preference name="UIWebViewBounce" value="false" />
+	<preference name="DisallowOverscroll" value="true"/>
+	
+	<!-- Android -->
+	<preference name="WebViewBounce" value="false"/>
+	<preference name="disallowOverscroll" value="true"/>
+<!--
+	<preference name="splashscreen" value="resourceName"/>
+	<preference name="backgroundColor" value="0xFFF"/>
+	<preference name="loadUrlTimeoutValue" value="20000"/>
+	<preference name="InAppBrowserStorageEnabled" value="true"/>
+-->
+	<feature name="App">
+		<param name="android-package" value="org.apache.cordova.App" />
+	</feature>
+	<feature name="Device">
+		<param name="android-package" value="org.apache.cordova.Device"/>
+	</feature>
+	<feature name="File">
+		<param name="android-package" value="org.apache.cordova.FileUtils" />
+	</feature>
+	<!--
+		<feature name="Contacts">
+		  <param name="android-package" value="org.apache.cordova.ContactManager"/>
+		</feature>
+		<feature name="NetworkStatus">
+		  <param name="android-package" value="org.apache.cordova.NetworkManager"/>
+		</feature>
+		<feature name="Storage">
+		  <param name="android-package" value="org.apache.cordova.Storage"/>
+		</feature>
+		<feature name="Geolocation">
+		  <param name="android-package" value="org.apache.cordova.GeoBroker"/>
+		</feature>
+		<feature name="Accelerometer">
+		  <param name="android-package" value="org.apache.cordova.AccelListener"/>
+		</feature>
+		<feature name="Compass">
+		  <param name="android-package" value="org.apache.cordova.CompassListener"/>
+		</feature>
+		<feature name="Media">
+		  <param name="android-package" value="org.apache.cordova.AudioHandler"/>
+		</feature>
+		<feature name="Camera">
+		  <param name="android-package" value="org.apache.cordova.CameraLauncher"/>
+		</feature>
+		<feature name="Notification">
+		  <param name="android-package" value="org.apache.cordova.Notification"/>
+		</feature>
+		<feature name="FileTransfer">
+		  <param name="android-package" value="org.apache.cordova.FileTransfer"/>
+		</feature>
+		<feature name="Capture">
+		  <param name="android-package" value="org.apache.cordova.Capture"/>
+		</feature>
+		<feature name="Battery">
+		  <param name="android-package" value="org.apache.cordova.BatteryListener"/>
+		</feature>
+		<feature name="SplashScreen">
+		  <param name="android-package" value="org.apache.cordova.SplashScreen"/>
+		</feature>
+		<feature name="Globalization">
+		  <param name="android-package" value="org.apache.cordova.Globalization"/>
+		</feature>
+		<feature name="InAppBrowser">
+		  <param name="android-package" value="org.apache.cordova.InAppBrowser"/>
+		</feature>
+	-->
+</widget>

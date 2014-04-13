@@ -1,0 +1,26 @@
+<div>
+	<div class="top-10px">
+		<span class="heading_1">List of books</span>
+	</div>
+	<div ng-switch="books.length>0" class="top-10px">
+		<div>
+			<div ng-switch-when="true">
+				Search: <input type="text" ng-model="search.text" />
+			</div>
+			<div ng-switch-when="false">
+				<div ng-class="{ 'top-10px': true, 'red': true, 'bold': true }">{{msg.warning}}</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="top-10px">
+		<div ng-repeat="book in books | filter:search.fn" class="top-5px" ng-class-odd="'dark-gray'" ng-class-even="'light-gray'">
+			<div class="float-left bold left-5px right-5px">{{$index+1}}.</div>
+			<div class="float-left">
+				<a class="bold" ng-href="#/book/detail?id={{book._id.$oid}}">{{book.name}}</a><br/>
+				{{book.publisher}}, <em>{{book.release | date:'yyyy/MM/dd'}}</em>
+			</div>
+			<div class="clear-both"></div>
+		</div>
+	</div>
+</div>

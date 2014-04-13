@@ -1,0 +1,14 @@
+<div>
+	<div class="top-10px">
+		<span class="heading_1">Cordova Workshop</span>
+	</div>
+	<div class="heading_2 top-10px">AngularJS (MV*) + Bootstrap (Twitter)</div>
+	
+	<div class="top-10px">
+		<div ng-repeat="(category, value) in device | orderBy:category">
+			<div class="width-70px float-left bold">{{category | firstUpperCase}}:</div>
+			<div class="float-left">{{value}}</div>
+			<div class="clear-both"></div>
+		</div>
+	</div>
+</div>

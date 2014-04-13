@@ -1,0 +1,57 @@
+{
+	"APP": {
+		"title"  : "Angular Cordova Workshop",
+		"name"   : "workshop",
+		"version": "1.0",
+		"author" : "Michal Čevela",
+		"email"  : "michal.cevela@gmail.com"
+	},
+	"DIR": {
+		"css" : "styles",
+		"font": "fonts",
+		"img" : "images",
+		"js"  : "scripts",
+		"angular": {
+			"constants"  : "constants",
+			"controllers": "controllers",
+			"directives" : "directives",
+			"filters"    : "filters",
+			"providers"  : "providers",
+			"services"   : "services",
+			"templates"  : "views"
+		}
+	},
+	"SCRIPTS": {
+		"common": {
+			"dirs" : [ "scripts" ],
+			"files": []
+		},
+		"desktop": {
+			"dirs" : [ "scripts/vendor/messaging", "vendor/stomp-websocket/lib" ],
+			"files": [
+				[ "mqtt-ws-3.1.js" ], [ "stomp.min.js" ]
+			]
+		},
+		"mobile": {
+			"dirs" : [ "." ],
+			"files": [
+				[ "cordova.js" ]
+			]
+		}
+	},
+	"HOST": {
+		"IP": "192.168.1.86",
+		"port": "8080",
+		"alias": "angular.dev"
+	},
+	"WS": {
+		"context": "/angular-workshop",
+		"REST": "/api/v1.0/",
+		"SOAP": "/api/soap/bookstore?wsdl"
+	},
+	"REST_API": [ "bookstore" ],
+	"CACHE": {
+		"enabled"  : false,
+		"templates": {}
+	}
+}
