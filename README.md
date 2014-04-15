@@ -49,7 +49,7 @@ Given the Twitter Bootstrap, the [IonicUI](http://ionicframework.com) library or
 
 As far as an integration stuff is concerned, [Apache Camel](http://camel.apache.org) or [Spring EIP](http://projects.spring.io/spring-integration/) might be worth a further consideration as they both provide a number of useful EIPs (Enterprise Integration Patterns) applicable on the backend.
 
-Last but not least, to build the whole application using only JavaScript syntax, the [Meteor.js](https://meteor.com) or a combination of Node.js+Express would be probably the best choice available to full-stack JavaScript developers these days I assume.
+Last but not least, to build the entire application using only JavaScript syntax, [Meteor.js](https://meteor.com) or a combination of Node.js and Express would be probably the best choice available to full-stack JavaScript developers these days I assume.
 
 ### 7. Inspiration
 
