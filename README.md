@@ -3,7 +3,7 @@
 ### Overview
 The main idea behind this application was to provide a functional example of how a real enterprise hybrid-mobile web application could be developed using a different sort of open-source tools, frameworks and libraries currently available to both frontend and backend developers.
 
-Although this application could potentially become a valueable source of information to some developers, a couple of configuration files such as *frontend/Gruntfile.js* and *backend/pom.xml* have been intentionally removed from this repository in order to prevent the application as a whole from being simply copied into a production environment. The reason for doing so is that this full-stack application is meant to serve as a showcase, thus everyone is welcome to use any pieces of the source code for information or experimental purposes.
+Although this application could potentially become a valueable source of information to some developers, a couple of configuration files such as *frontend/Gruntfile.js* and *backend/pom.xml* have been removed from this repository in order to prevent the application as a whole from being simply copied into a production environment. The reason for doing so is that this full-stack application is meant to serve as a showcase, thus everyone is welcome to use any pieces of the source code for information or experimental purposes.
 
 ### 1. Frontend
 To make the frontend development smoother, I got the [**NPM**](http://www.npmjs.org) (Node Package Manager) installed and leveraged it when scaffolding the project structure, resolving dependencies as well as building a mobile version and deploying it on the Android platform.
