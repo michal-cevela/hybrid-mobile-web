@@ -17,7 +17,7 @@ The frontend part then consists of the following packages:
 * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 * [Twitter Bootstrap](http://getbootstrap.com) v3.x (including [jQuery](http://jquery.com) as its underlying dependency)
 
-Regarding the AngularJS framework, the main routing logic was designed in a rather generic way in order to take a full advantage of creating so called [SPA](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly just by taking few simple steps. Furthermore, all can happen without having to completely reload the application which is exactly what I imagine when thinking about a component-oriented web design anyway.
+Regarding the AngularJS framework, the main routing logic was designed in a rather generic way in order to take a full advantage of creating so called [SPA](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly just by taking few simple steps. Furthermore, all can happen without having to completely reload the application which is exactly what I imagine when thinking about a component-oriented web design anyway. Well, Angular rules!
 
 ### 2. Backend
 At the very first stage I started on a crossroad while designing the backend as I was hesitating a bit between picking up an old good Java friend and a modern scalable [Meteor.js](https://meteor.com) platform. Well, after considering several technologies that were planned to be involved in the backend, I eventually ended up laying out Java foundations as I found this approach more flexible and also richer in terms of _what_ all can be brought into the whole solution later on and even more importantly _how_ it could be achieved.
@@ -42,10 +42,12 @@ For some reason I was feeling an affinity to the [Apache Cordova](http://cordova
 To make the given solution open to a further enterprise integration, [Apache ServiceMix](http://servicemix.apache.org) along with [Apache ActiveMQ](http://activemq.apache.org) were set up appropriately. Having said that not only web clients can communicate with the backend using, for instance, the [STOMP](http://stomp.github.io) or [MQTT](http://mqtt.org) protocol over [WebSockets](http://www.websockets.org). Furthermore, some parts of the business logic can be added on demand using hot deployment which is a great feature when building 100% [SOA]((http://en.wikipedia.org/wiki/Service-oriented_architecture)) applications consisting of loosely-coupled components. In this sense ServiceMix can act as an additional runtime that some business modules can be deployed onto. Clients can then interact with the server-side logic via RESTful APIs, SOAP endpoints or [MDBs](http://docs.oracle.com/javaee/7/tutorial/doc/ejb-intro003.htm) (Message-Driven Beans). Broadly speaking, such a concept nicely taps the SOA approach on the shoulder :-)
 
 ### 5. [BPM](http://en.wikipedia.org/wiki/Business_process_management)
-Even though I am a novice in the BPM (Business Process Management) field, the [Activiti.org](http://activiti.org) framework can be quickly integrated into ServiceMix when required.
+Even though I am a novice in the BPM field, the [Activiti.org](http://activiti.org) framework can be quickly integrated into ServiceMix when required.
 
 ### 6. Possible improvements
-Given the Twitter Bootstrap, the [IonicUI](http://ionicframework.com) library or just the Angular ui-bootstrap module could be a better choice since they both have been designed with AngularJS in mind and do not therefore require the jQuery library to be included as a dependency.
+Given the Twitter Bootstrap, the [IonicUI](http://ionicframework.com) framework or just the Angular ui-bootstrap module could be a better choice since they both have been designed with AngularJS in mind and do not therefore require the jQuery library to be included as a dependency.
+
+Regarding the communication with REST APIs, the Restangular module is generally considered to be a more suitable solution as compared to the native ngResource module.
 
 As far as the integration stuff is concerned, [Mule ESB](https://www.mulesoft.org), [Apache Camel](http://camel.apache.org) or [Spring EIP](http://projects.spring.io/spring-integration/) might be worth a further consideration as they all provide a number of useful EIPs (Enterprise Integration Patterns) applicable on the backend.
 
