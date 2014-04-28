@@ -11,6 +11,8 @@
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<atmosphere.version>2.1.2</atmosphere.version>
+		<atmosphere.compat.version>2.0.1</atmosphere.compat.version>
 		<cxf.version>2.7.10</cxf.version>
 		<jackson.version>1.9.12</jackson.version>
 		<jettison.version>1.3.5</jettison.version>
@@ -18,11 +20,36 @@
 		<mongodb.version>2.11.3</mongodb.version>
 		<servlet.version>3.1.0</servlet.version>
 		<spring.version>3.2.8.RELEASE</spring.version>
+		<spring.rabbitmq.version>1.3.1.RELEASE</spring.rabbitmq.version>
 		<swagger.version>1.3.2</swagger.version>
+		<websocket.version>1.0</websocket.version>
 	</properties>
 	
 	<dependencies>
-		<!-- JavaEE (JAX-RS, Servlet, Jackson, JSON/XML) -->
+		<!-- Atmosphere -->
+		<dependency>
+			<groupId>org.atmosphere</groupId>
+			<artifactId>atmosphere-runtime-native</artifactId>
+			<version>${atmosphere.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>atmosphere-compat-tomcat7</artifactId>
+					<groupId>org.atmosphere</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.atmosphere</groupId>
+			<artifactId>atmosphere-compat-jbossweb</artifactId>
+			<version>${atmosphere.compat.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.atmosphere</groupId>
+			<artifactId>atmosphere-compat-tomcat</artifactId>
+			<version>${atmosphere.compat.version}</version>
+		</dependency>
+		
+		<!-- JavaEE (JAX-RS, Servlet, Jackson, JSON/XML, WebSocket) -->
 <!--
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
@@ -36,6 +63,11 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>${websocket.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -139,14 +171,21 @@
 			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
-<!--
+		
+		<!-- RabbitMQ -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-asm</artifactId>
-			<version>${spring.version}</version>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+			<version>${spring.rabbitmq.version}</version>
 			<scope>provided</scope>
 		</dependency>
--->
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>rabbitmq-client</artifactId>
+			<version>1.3.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- Swagger UI -->
 		<dependency>
 			<artifactId>swagger-jaxrs_2.10</artifactId>

@@ -1,6 +1,6 @@
 package cz.angular.cordova.ws;
 
-import cz.angular.cordova.media.HypermediaResponse;
+import cz.angular.cordova.ws.media.HypermediaResponse;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import javax.jws.WebParam;

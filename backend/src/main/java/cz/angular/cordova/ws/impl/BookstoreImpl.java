@@ -11,8 +11,8 @@ import com.mongodb.util.JSON;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
-import cz.angular.cordova.media.HypermediaLink;
-import cz.angular.cordova.media.HypermediaResponse;
+import cz.angular.cordova.ws.media.HypermediaLink;
+import cz.angular.cordova.ws.media.HypermediaResponse;
 import cz.angular.cordova.ws.Bookstore;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -44,7 +44,7 @@ import org.springframework.stereotype.Service;
  * @since March 2014
  */
 @WebService(serviceName = "Bookstore", portName = "BookstorePort")
-@Service("BookstoreService")
+@Service("Bookstore-API")
 @Path("/bookstore")
 @Api(value="/bookstore", description="Bookstore API")
 @Produces({
