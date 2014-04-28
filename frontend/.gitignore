@@ -1,6 +1,5 @@
 .idea
 .tmp
-Gruntfile.js
 karma.conf.js
 karma-e2e.conf.js
 /node_modules
