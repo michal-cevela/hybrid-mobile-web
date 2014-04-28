@@ -14,7 +14,7 @@ The frontend part then consists of the following packages:
 * [Grunt](http://gruntjs.com)
 * [**Bower**](http://bower.io)
 * [**AngularJS**](http://angularjs.org) v1.2.x (including the [ui-router](https://github.com/angular-ui/ui-router) module)
-* [**WebSockets**](http://en.wikipedia.org/wiki/WebSocket) (including [STOMP](https://github.com/jmesnil/stomp-websocket))
+* [**WebSockets**](http://en.wikipedia.org/wiki/WebSocket) (including the [STOMP](https://github.com/jmesnil/stomp-websocket) library)
 * [Twitter Bootstrap](http://getbootstrap.com) v3.x (including [jQuery](http://jquery.com) as its underlying dependency)
 
 Regarding the AngularJS framework, the main routing logic was designed in a rather generic way in order to take a full advantage of creating a component-based [SPA](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly using a lazy loading technique. Furthermore, all can happen without having the application to be completely reloaded which is how some CMS are desired to be developed. Well, Angular is truly sophisticated and powerful framework even though its learning curve becomes fairly steep after some time!
@@ -24,8 +24,8 @@ At the very first stage I started on a crossroad while designing the backend as 
 
 To keep the backend fast, easy to understand, compact and portable among most of the modern Java application servers and servlet containers, I have utilized the following software tools or frameworks respectively:
 
-* [**Apache Tomcat 7.x**](http://tomcat.apache.org)
-* [**Apache CXF**](http://cxf.apache.org) ([JAX-WS](http://cxf.apache.org/docs/jax-ws-configuration.html), [JAX-RS](http://cxf.apache.org/docs/jax-rs.html))
+* [**Apache Tomcat v7.x**](http://tomcat.apache.org)
+* [**Apache CXF**](http://cxf.apache.org) (including [JAX-WS](http://cxf.apache.org/docs/jax-ws-configuration.html), [JAX-RS](http://cxf.apache.org/docs/jax-rs.html))
 * [**Atmosphere**](https://github.com/Atmosphere/atmosphere)
 * [**Spring**](http://spring.io)
 * [MongoDB](http://www.mongodb.org)
