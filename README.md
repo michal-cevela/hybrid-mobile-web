@@ -17,12 +17,12 @@ The frontend part then consists of the following packages:
 * [WebSockets](http://en.wikipedia.org/wiki/WebSocket) (including [STOMP](https://github.com/jmesnil/stomp-websocket))
 * [Twitter Bootstrap](http://getbootstrap.com) v3.x (including [jQuery](http://jquery.com) as its underlying dependency)
 
-Regarding the AngularJS framework, the main routing logic was designed in a rather generic way in order to take a full advantage of creating a component-based [SPA](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly just by taking few simple steps. Furthermore, all can happen without having to completely reload the application which is how some CMS are desired to be developed. Well, Angular is truly sophisticated and powerful framework that rules!
+Regarding the AngularJS framework, the main routing logic was designed in a rather generic way in order to take a full advantage of creating a component-based [SPA](http://en.wikipedia.org/wiki/Single-page_application) (Single Page Applications). This basically means that new UI views can be quickly registered on the fly using a lazy loading technique. Furthermore, all can happen without having the application to be completely reloaded which is how some CMS are desired to be developed. Well, Angular is truly sophisticated and powerful framework even though its learning curve becomes fairly steep after some time!
 
 ### 2. Backend
 At the very first stage I started on a crossroad while designing the backend as I was hesitating a bit between picking up an old good Java friend and a modern scalable [Meteor.js](https://meteor.com) platform. Well, after considering several technologies that were planned to be involved in the backend, I eventually ended up laying out Java foundations as I was feeling more experienced in developing J2EE-based solutions.
 
-To make the backend both compact and portable among most of the modern Java application servers and servlet containers, I have utilized the following software tools or frameworks respectively:
+To keep the backend fast, easy to understand, compact and portable among most of the modern Java application servers and servlet containers, I have utilized the following software tools or frameworks respectively:
 
 * [**Apache Tomcat](http://tomcat.apache.org)
 * [**Apache CXF**](http://cxf.apache.org) ([JAX-WS](http://cxf.apache.org/docs/jax-ws-configuration.html), [JAX-RS](http://cxf.apache.org/docs/jax-rs.html))
@@ -33,9 +33,9 @@ To make the backend both compact and portable among most of the modern Java appl
 * [Jackson](http://jackson.codehouse.org)
 * [Swagger](http://swagger.wordnik.com)
 
-To keep modularity in mind, the *Spring* framework was brought into an existing solution as it can be easily integrated with a number of open-source products distributed under the Apache licence. In addition to that the support for WebSockets and asynchronous RESTful APIs is already implemented in the project so that new Web 3.0 features are ready to be used when needed.
+To bear modularity in mind, the *Spring* framework was brought into an existing solution as it can be easily integrated with a number of open-source products distributed not only under the Apache licence. In addition to that the support for WebSockets, Servlets v3.1 and asynchronous RESTful APIs (JAX-RS v2.0) is already implemented in the project so that new Web 3.0 features are ready to be used when needed.
 
-When it comes to Web Services, both RESTful APIs and SOAP endpoints are published using an XML descriptor which makes the Web Services incredibly easy to work with and also maintain. Apart from that the suggested concept of designing hypermedia-driven RESTful APIs was taken into consideration too. At the end particular data records can be retrieved in a different format (MIME types) such as JSON, JSONP or XML along with a set of links pointing to accessible resources. Please see [HATEOAS](http://spring.io/understanding/HATEOAS) for more information.
+When it comes to Web Services, both RESTful APIs and SOAP endpoints are published using an XML descriptor which makes the Web Services incredibly easy to work with and maintain. Apart from that the suggested concept of designing hypermedia-driven RESTful APIs was taken into account too. At the end data records can be retrieved in a different format (MIME types) such as JSON, JSONP or XML along with a set of links pointing to accessible resources. Please see [HATEOAS](http://spring.io/understanding/HATEOAS) for more information.
 
 ### 3. Mobile version
 For some reason I was feeling an affinity to the [Apache Cordova](http://cordova.apache.org) framework when making a decision regarding building the application for the Android platform. This part was, however, a bit tricky and made me thinking for a certain period of time as building a desktop SPA involves following slightly different rules as compared to how SPAs can be developed as a desktop solution. Well, this part gave me a proper lesson, no question about that :-)
