@@ -8,7 +8,7 @@ var $$util = (function() {
 
 	return {
 		/**
-		 * Get the Angular service ($q, $log, $http, $timeout, $rootScope) by calling an internal injector
+		 * Get the Angular service ($q, $log, $http, $timeout, $rootScope) by calling an injector service
 		 * @param {String} name
 		 * @returns {Object}
 		 */
@@ -52,17 +52,17 @@ var $$util = (function() {
 
 		/**
 		 * Device ready
-		 * @param {$scope} scope
+		 * @param {$scope} $scope
 		 * @returns {$q.promise}
 		 */
-		deviceReady: function(scope) {
+		deviceReady: function($scope) {
 			var $q = this.getService('$q'),
 				defer = $q.defer();
 
 			if (window.cordova) {
 				document.addEventListener('deviceready', function() {
-					if (scope) {
-						scope.$apply(function() {
+					if ($scope) {
+						$scope.$apply(function() {
 							defer.resolve('Mobile device is ready...');
 						});
 					} else {
@@ -71,8 +71,8 @@ var $$util = (function() {
 				}, false);
 			} else {
 				angular.element(document).ready(function() {
-					if (scope) {
-						scope.$apply(function() {
+					if ($scope) {
+						$scope.$apply(function() {
 							defer.resolve('Desktop browser is ready...');
 						});
 					} else {
@@ -152,4 +152,3 @@ var $$util = (function() {
 		}
 	}
 }());
-

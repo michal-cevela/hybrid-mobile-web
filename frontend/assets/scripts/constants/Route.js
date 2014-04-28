@@ -98,16 +98,18 @@ angular.module('Constant.Route', [])
 			getTemplate: function(tplFile) {
 				var $http = this.getService('$http'),
 					 $templateCache = this.getService('$templateCache'),
-					 defer = this.getService('$q').defer(),
-					 config = this.getConfig(),
-					 tplDir = config.DIR.angular.templates,
-					 options = { params: { '_': new Date().getTime() } };
+					 defer   = this.getService('$q').defer(),
+					 config  = this.getConfig(),
+					 tplDir  = config.DIR.angular.templates,
+					 options = {
+						 params: { '_': new Date().getTime() }
+					 };
 
 				if (config.CACHE.enabled === true) {
 					options['cache'] = $templateCache;
 				}
 
-				$http.get(tplDir + '/' + tplFile, { params: { '_': new Date().getTime() } }).then(
+				$http.get(tplDir + '/' + tplFile, options).then(
 					// onSuccess
 					function (response) {
 						$log.debug('constants/Route.js -> getTemplate(): ' + tplDir + '/' + tplFile + ' (ok)');

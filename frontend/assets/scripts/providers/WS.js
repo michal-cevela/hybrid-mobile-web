@@ -8,6 +8,19 @@
 angular.module('Provider.WS', [])
 	.provider('WS', [function() {
 		return {
+			configBaseUrl: function(CONFIG) {
+				var protocol = window.location.protocol,
+					 host, REST;
+
+				if (protocol == 'file:') {
+					host = 'http://' + CONFIG.HOST.IP + ':' + CONFIG.HOST.port;
+				} else {
+					host = protocol + '//' + CONFIG.HOST.alias;
+				}
+
+				return (host + CONFIG.WS.context + CONFIG.WS.REST);
+			},
+
 			$get: ['Security', 'CONFIG', function(Security, CONFIG) {
 				var allowedProtocols = Security.getAllowedProtocols();
 

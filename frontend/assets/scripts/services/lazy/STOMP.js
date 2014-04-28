@@ -33,7 +33,7 @@ $$util.getProvider('service')
 				_reconnect = reconnect || _reconnect;
 
 				if ( (_client === undefined) || (_client.connected === false) ) {
-					_client = Stomp.client("ws://" + _host + ":" + _port.toString() + "/stomp");
+					_client = Stomp.client('ws://' + _host + ':' + _port.toString() + '/stomp');
 
 					_client.connect({ login: usr || _usr, passcode: pwd || _pwd, 'cliend-id': id  || 'stomp_' + new Date().getTime().toString() },
 						// onSuccess

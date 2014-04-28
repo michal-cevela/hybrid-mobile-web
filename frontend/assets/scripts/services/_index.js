@@ -9,5 +9,6 @@ angular.module('Services', [
 	'Service.Book',
 	'Service.Books',
 	'Service.RouteInterceptor',
-	'Service.User'
+	'Service.User',
+	'Service.Parser'
 ]);

@@ -50,33 +50,35 @@ $$util.getProvider('controller')
 				disconnect: STOMP.disconnect
 			}
 /*
-			 MQTT.init(CONFIG.HOST.IP, 61614);
-			 MQTT.connect(
-			 // onSuccess
-			 function() {
-			 MQTT.subscribe('/workshop/#', 2);
+			MQTT.connect(CONFIG.HOST.IP, 61614, null, 5, true,
+				// onSuccess
+				function() {
+					MQTT.subscribe('/workshop/#', 2);
 
-			 window.setTimeout(function() {
-			 MQTT.sendMessage('Test', '/workshop/test', 2);
-			 }, 3000);
+					window.setTimeout(function() {
+						MQTT.sendMessage('Test', '/workshop/test', 2);
+					}, 3000);
 
-			 window.setTimeout(function() {
-			 MQTT.disconnect();
-			 }, 5000);
-			 },
-			 // onFailure
-			 function(response) {
-			 //					$log.error(response);
-			 },
-			 // onMessageArrived
-			 function(a_message) {
-			 $log.debug(a_message);
-			 },
-			 // onConnectionLost
-			 function(response) {
-			 //					$log.error(response);
-			 }
-			 );
+					window.setTimeout(function() {
+						MQTT.disconnect();
+					}, 5000);
+				},
+
+				// onFailure
+				function(response) {
+					//	$log.error(response);
+				},
+
+				// onMessageArrived
+				function(a_message) {
+					$log.debug(a_message);
+				},
+
+				// onConnectionLost
+				function(response) {
+					//	$log.error(response);
+				}
+			);
 */
 		}
 	]);
