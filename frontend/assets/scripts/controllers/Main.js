@@ -6,9 +6,12 @@
  * @version 1.0
  */
 angular.module('Ctrl.Main', [])
-	.controller('MainCtrl', ['$scope', '$location', '$window', '$filter', 'ROUTE',
-		function($scope, $location, $window, $filter, ROUTE) {
+	.controller('MainCtrl', ['$scope', '$location', '$window', '$filter', 'Url', 'User',
+		function($scope, $location, $window, $filter, Url, User) {
 			$log.debug('controllers/Main.js: The main controller has been initialized.');
+
+			$scope.User = User;
+			$scope.Url  = Url;
 
 			$scope.$on('$stateChangeStart',
 				function(event, toState, toParams, fromState, fromParams) {

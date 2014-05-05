@@ -7,27 +7,27 @@
  */
 angular.module('Constant.Route', [])
 	.constant('ROUTE', (function() {
-		var _config = {},
+		var _CONFIG = {},
 			 _routes = {
 				controllers: []
 			 };
 
 		return {
 			/**
-			 * Set the application's configuration
-			 * @param {Object} config
+			 * Set the application's CONFIGuration
+			 * @param {Object} CONFIG
 			 * @returns {null}
 			 */
-			setConfig: function(config) {
-				_config = config;
+			setConfig: function(CONFIG) {
+				_CONFIG = CONFIG;
 			},
 
 			/**
-			 * Get the application's configuration
+			 * Get the application's CONFIGuration
 			 * @returns {Object}
 			 */
 			getConfig: function() {
-				return _config;
+				return _CONFIG;
 			},
 
 			/**
@@ -49,26 +49,31 @@ angular.module('Constant.Route', [])
 			},
 
 			/**
-			 * Load the given HTML template
-			 * @param {String} tplPath
+			 * Get the given HTML template
+			 * @param {String} tplFile
 			 * @returns {String}
 			 */
-			loadTemplate: function(tplPath) {
-				var $this = this;
+			getTemplate: function(tplFile) {
+				var $http   = this.getService('$http'),
+					 tplDir  = this.getConfig().DIR.angular.templates,
+					 options = {
+						params: { '_': new Date().getTime() }
+					 };
 
-				return this.getTemplate(tplPath).then(
+				return $http.get(tplDir + '/' + tplFile, options).then(
 					// onSuccess
 					function (response) {
+						$log.debug('constants/Route.js -> getTemplate(): ' + tplDir + '/' + tplFile + ' (ok)');
 						return response.data;
 					},
 					// onError
 					function (response) {
-						var url = response.config.url;
+						$log.error('constants/Route.js -> getTemplate(): ' + tplDir + '/' + tplFile + ' (failed)');
+						var url = response.CONFIG.url;
 
 						switch (response.status) {
 							case 404:
 								return '<div class="top-10px red bold">404: Page not found</div>';
-//								return '<div class="top-10px red bold">404: Template ' + url + ' was not found on the server</div>';
 /*
 								return $this.getTemplate('404.html').then(
 									// onSuccess
@@ -91,41 +96,6 @@ angular.module('Constant.Route', [])
 			},
 
 			/**
-			 * Get an HTML template
-			 * @param {String} tplFile
-			 * @returns {defer.promise}
-			 */
-			getTemplate: function(tplFile) {
-				var $http = this.getService('$http'),
-					 $templateCache = this.getService('$templateCache'),
-					 defer   = this.getService('$q').defer(),
-					 config  = this.getConfig(),
-					 tplDir  = config.DIR.angular.templates,
-					 options = {
-						 params: { '_': new Date().getTime() }
-					 };
-
-				if (config.CACHE.enabled === true) {
-					options['cache'] = $templateCache;
-				}
-
-				$http.get(tplDir + '/' + tplFile, options).then(
-					// onSuccess
-					function (response) {
-						$log.debug('constants/Route.js -> getTemplate(): ' + tplDir + '/' + tplFile + ' (ok)');
-						defer.resolve(response);
-					},
-					// onError
-					function (response) {
-						$log.error('constants/Route.js -> getTemplate(): ' + tplDir + '/' + tplFile + ' (failed)');
-						defer.reject(response);
-					}
-				);
-
-				return defer.promise;
-			},
-
-			/**
 			 * Set a functionality for the Resolve block that is applicable within a route definition
 			 */
 			resolve: {
@@ -140,8 +110,8 @@ angular.module('Constant.Route', [])
 					}
 				],
 
-				lazyLoading: ['$q', '$stateParams', '$filter', '$state', 'CONFIG',
-					function($q, $stateParams, $filter, $state, CONFIG) {
+				lazyLoading: ['$q', '$stateParams', '$filter', '$state', 'CONFIG', 'ROUTE',
+					function($q, $stateParams, $filter, $state, CONFIG, ROUTE) {
 						var defer = $q.defer(),
 							 ctrl = {
 								 dir: CONFIG.DIR.js + '/' + CONFIG.DIR.angular.controllers,
@@ -150,64 +120,68 @@ angular.module('Constant.Route', [])
 							 params = {};
 
 						if ($$util.isEmpty($stateParams['level1'])) {
-							ctrl.file = 'Home.js';
+							ctrl.file = 'Home';
 						} else {
-							ctrl.file = $filter('firstUpperCase')($stateParams['level1']) + '.js';
+							ctrl.file = $filter('firstUpperCase')($stateParams['level1']);
 						}
 
-						$$util.loadJScripts({
-							dirs: [ ctrl.dir + '/lazy' ],
-							files: [
-								[ ctrl.file ]
-							]
-						}).then(
-							// Success
-							function(response) {
-								$log.debug('constants/Route.js: A lazy controller loaded...');
-								$log.debug($$util.getStatus(response));
+						if (ROUTE.hasLazyController(ctrl.file) == true) {
+							defer.resolve('OK');
+						} else {
+							$$util.loadJScripts({
+								dirs: [ ctrl.dir + '/lazy' ],
+								files: [
+									[ ctrl.file + '.js' ]
+								]
+							}).then(
+								// Success
+								function(response) {
+									$log.debug('constants/Route.js: A lazy controller loaded...');
+									$log.debug($$util.getStatus(response));
 
-								_routes.controllers.push(ctrl.file);
+									_routes.controllers.push(ctrl.file);
 
-								if (window.$dependencies) {
-									var promises = [];
+									if (window.$dependencies) {
+										var promises = [];
 
-									for (var dependency in window.$dependencies) {
-										if (window.$dependencies[dependency].length > 0) {
-											promises.push(
-												$$util.loadJScripts({
-													dirs: [ CONFIG.DIR.js + '/' + CONFIG.DIR.angular[dependency] + '/lazy' ],
-													files: [
-														window.$dependencies[dependency]
-													]
-												})
-											);
+										for (var dependency in window.$dependencies) {
+											if (window.$dependencies[dependency].length > 0) {
+												promises.push(
+													$$util.loadJScripts({
+														dirs: [ CONFIG.DIR.js + '/' + CONFIG.DIR.angular[dependency] + '/lazy' ],
+														files: [
+															window.$dependencies[dependency]
+														]
+													})
+												);
+											}
 										}
+
+										$q.all(promises).then(
+											function(response) {
+												$log.debug("constants/Route.js: Lazy controller's dependencies loaded...");
+												$log.debug($$util.getStatus(response));
+												defer.resolve(response);
+											},
+											function(response) {
+												$log.error("constants/Route.js: One of the controller's dependencies failed...");
+												$log.error($$util.getStatus(response));
+												defer.reject(response);
+											}
+										)
+										delete window.$dependencies;
+									} else {
+										defer.resolve(response);
 									}
-
-									$q.all(promises).then(
-										function(response) {
-											$log.debug("constants/Route.js: Lazy controller's dependencies loaded...");
-											$log.debug($$util.getStatus(response));
-											defer.resolve(response);
-										},
-										function(response) {
-											$log.error("constants/Route.js: One of the controller's dependencies failed...");
-											$log.error($$util.getStatus(response));
-											defer.reject(response);
-										}
-									)
-									delete window.$dependencies;
-								} else {
-									defer.resolve(response);
+								},
+								// Error
+								function(response) {
+									$log.error('constants/Route.js: Controller failed');
+									$log.error($$util.getStatus(response));
+									defer.reject(response);
 								}
-							},
-							// Error
-							function(response) {
-								$log.error('constants/Route.js: Controller failed');
-								$log.error($$util.getStatus(response));
-								defer.reject(response);
-							}
-						)
+							)
+						}
 
 						return defer.promise;
 					} // end: function(...)

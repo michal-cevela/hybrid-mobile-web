@@ -79,7 +79,7 @@ var app = angular.module('workshop', [
 				views: {
 					'navbar@': {
 						templateProvider: [function() {
-							return ROUTE.loadTemplate('navbar.html');
+							return ROUTE.getTemplate('navbar.html');
 						}]
 					},
 					'content@': {
@@ -87,7 +87,7 @@ var app = angular.module('workshop', [
 					},
 					'footer@': {
 						templateProvider: [function() {
-							return ROUTE.loadTemplate('footer.html');
+							return ROUTE.getTemplate('footer.html');
 						}]
 					}
 /*
@@ -109,18 +109,29 @@ var app = angular.module('workshop', [
 						var param1 = $stateParams.level1,
 							 ctrlName = ($$util.isEmpty(param1)) ? 'Home' : $filter('firstUpperCase')(param1);
 
-						if (ROUTE.hasLazyController(ctrlName + '.js') == true) {
+						if (ROUTE.hasLazyController(ctrlName) == true) {
 							return ctrlName + 'Ctrl';
 						}
 					}
 				],
-				templateProvider: ['$stateParams', 'ROUTE',
-					function($stateParams, ROUTE) {
+				templateProvider: ['$stateParams', '$http', '$templateCache', 'ROUTE',
+					function($stateParams, $http, $templateCache, ROUTE) {
 						// Notice: HTTP requests using $http or $resource service CANNOT be intercepted within this scope!
 						var param1 = $stateParams.level1,
-							 tplFile = ($$util.isEmpty(param1)) ? 'home.html' : param1.toLowerCase() + '.html';
+							 tplFile = ($$util.isEmpty(param1)) ? 'home.html' : param1.toLowerCase() + '.html',
+							 tplData = $templateCache.get(tplFile);
 
-						return ROUTE.loadTemplate(tplFile);
+						$log.debug('LEVEL 1:');
+
+						if (tplData === undefined) {
+							tplData = ROUTE.getTemplate(tplFile);
+
+							if ($http.defaults.cache === true) {
+								$templateCache.put(tplFile, tplData);
+							}
+						}
+
+						return tplData;
 					}
 				],
 				resolve: {
@@ -134,19 +145,30 @@ var app = angular.module('workshop', [
 						var param1 = $stateParams.level1,
 							 ctrlName = ($$util.isEmpty(param1)) ? 'Home' : $filter('firstUpperCase')(param1);
 
-						if (ROUTE.hasLazyController(ctrlName + '.js') == true) {
+						if (ROUTE.hasLazyController(ctrlName) == true) {
 							return ctrlName + 'Ctrl';
 						}
 					}
 				],
-				templateProvider: ['$stateParams', 'ROUTE',
-					function($stateParams, ROUTE) {
+				templateProvider: ['$stateParams', '$http', '$templateCache', 'ROUTE',
+					function($stateParams, $http, $templateCache, ROUTE) {
 						// Notice: HTTP requests using $http or $resource service CANNOT be intercepted within this scope!
 						var param1  = $stateParams.level1,
 							 param2  = $stateParams.level2,
-							 tplFile = ($$util.isEmpty(param1) || $$util.isEmpty(param2)) ? 'home.html' : param1.toLowerCase() + '-' + param2.toLowerCase() + '.html';
+							 tplFile = ($$util.isEmpty(param1) || $$util.isEmpty(param2)) ? 'home.html' : param1.toLowerCase() + '-' + param2.toLowerCase() + '.html',
+							 tplData = $templateCache.get(tplFile);
 
-						return ROUTE.loadTemplate(tplFile);
+						$log.debug('LEVEL 2:');
+
+						if (tplData === undefined) {
+							tplData = ROUTE.getTemplate(tplFile);
+
+							if ($http.defaults.cache === true) {
+								$templateCache.put(tplFile, tplData);
+							}
+						}
+
+						return tplData;
 					}
 				],
 				resolve: {
@@ -159,7 +181,7 @@ var app = angular.module('workshop', [
 	.run(['$rootScope', '$http', '$state', '$templateCache', 'Restangular', 'CONFIG',
 		function($rootScope, $http, $state, $templateCache, Restangular, CONFIG) {
 //			$http.defaults.headers.common['Authentication'] = 'Basic YmVlcDpib29w';
-			$http.defaults.cache = (CONFIG.CACHE.enabled !== "true") ? false : true;
+			$http.defaults.cache = (CONFIG.CACHE.enabled === "true") ? true : false;
 
 			if (!$http.defaults.cache) {
 				$log.debug("app.js: Template caching was disabled.");

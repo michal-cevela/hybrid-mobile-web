@@ -19,7 +19,7 @@ angular.module('Provider.Url', [])
 				_prefix = prefix;
 			},
 
-			$get: [function() {
+			$get: ['$location', function($location) {
 				return {
 					/**
 					 * Get the URL prefix
@@ -27,6 +27,15 @@ angular.module('Provider.Url', [])
 					 */
 					getPrefix: function() {
 						return _prefix;
+					},
+
+					/**
+					 * Redirect to an URL address
+					 * @param {String}
+					 * @returns undefined
+					 */
+					redirect: function (url) {
+						$location.path(url).replace();
 					}
 				};
 			}]

@@ -6,19 +6,19 @@
  * @version 1.0
  */
 angular.module('Ctrl.Footer', [])
-	.controller('FooterCtrl', ['$scope', 'Url', function($scope, Url) {
-		$scope.hash = Url.getPrefix();
-
-		$scope.links = [
-			{
-				text: 'Home',
-				path: '/'
-			}, {
-				text: 'Books',
-				path: '/books/menu'
-			}, {
-				text: 'Contact',
-				path: '/contact'
-			}
-		];
-	}])
+	.controller('FooterCtrl', ['$scope',
+		function($scope) {
+			$scope.links = [
+				{
+					text: 'Home',
+					path: '/'
+				}, {
+					text: 'Books',
+					path: '/books/menu'
+				}, {
+					text: 'Contact',
+					path: '/contact'
+				}
+			];
+		}
+	]);

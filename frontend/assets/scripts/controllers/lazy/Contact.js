@@ -13,10 +13,8 @@ window.$dependencies = {
 };
 
 $$util.getProvider('controller')
-	.register('ContactCtrl', ['$scope', '$location', '$resource', '$stateParams', 'Contact', 'CONFIG', 'ROUTE', 'WS',
-		function($scope, $location, $resource, $stateParams, Contact, CONFIG, ROUTE, WS) {
-			$scope.$location = $location;
-
+	.register('ContactCtrl', ['$scope', '$resource', '$stateParams', 'Contact', 'CONFIG', 'ROUTE', 'WS',
+		function($scope, $resource, $stateParams, Contact, CONFIG, ROUTE, WS) {
 			$scope.error = {
 				request: false,
 				response: false,

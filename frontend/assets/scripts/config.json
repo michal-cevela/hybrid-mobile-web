@@ -51,7 +51,6 @@
 	},
 	"REST_API": [ "bookstore" ],
 	"CACHE": {
-		"enabled"  : false,
-		"templates": {}
+		"enabled": "true"
 	}
 }

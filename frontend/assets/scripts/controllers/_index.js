@@ -9,9 +9,6 @@ angular.module('Controllers', [
 	'Ctrl.Main',
 	'Ctrl.Navbar',
 	'Ctrl.Footer',
-//	'Ctrl.Home',
-	'Ctrl.Auth',
 	'Ctrl.Book',
 	'Ctrl.Books'
-//	'Ctrl.Contact'
 ]);

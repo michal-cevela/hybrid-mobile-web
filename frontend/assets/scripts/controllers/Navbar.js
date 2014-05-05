@@ -6,10 +6,9 @@
  * @version 1.0
  */
 angular.module('Ctrl.Navbar', [])
-	.controller('NavbarCtrl', ['$scope', '$location', 'Url', 'User',
-		function($scope, $location, Url, User) {
+	.controller('NavbarCtrl', ['$scope', 'User',
+		function($scope, $location, User) {
 			$scope.User = User;
-			$scope.hash = Url.getPrefix();
 
 			$scope.links = [
 				{
@@ -29,10 +28,5 @@ angular.module('Ctrl.Navbar', [])
 					path: '/contact'
 				}
 			];
-/*
-			$scope.redirect = function(url) {
-				$location.path(url).replace();
-			};
-*/
 		}
 	]);
