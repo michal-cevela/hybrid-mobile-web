@@ -70,8 +70,8 @@ var app = angular.module('workshop', [
 			});
 
 			// For any unmatched url, redirect to /
-			$urlRouterProvider.when('/', '/home');
-			$urlRouterProvider.otherwise('/home');
+			$urlRouterProvider.when('/', '/cz/home');
+			$urlRouterProvider.otherwise('/cz/home');
 
 			$stateProvider.state('main', {
 				abstract: true,
@@ -103,7 +103,7 @@ var app = angular.module('workshop', [
 				}
 			})
 			.state('main.level1', {
-				url: '/:level1',
+				url: '/:lang/:level1',
 				controllerProvider: ['$stateParams', '$filter', 'ROUTE',
 					function($stateParams, $filter, ROUTE) {
 						var param1 = $stateParams.level1,
@@ -121,8 +121,6 @@ var app = angular.module('workshop', [
 							 tplFile = ($$util.isEmpty(param1)) ? 'home.html' : param1.toLowerCase() + '.html',
 							 tplData = $templateCache.get(tplFile);
 
-						$log.debug('LEVEL 1:');
-
 						if (tplData === undefined) {
 							tplData = ROUTE.getTemplate(tplFile);
 
@@ -135,11 +133,12 @@ var app = angular.module('workshop', [
 					}
 				],
 				resolve: {
-					lazyLoading: ROUTE.resolve.lazyLoading
+					lazyDependencies: ROUTE.resolve.lazyDependencies,
+					AJAX: ROUTE.resolve.AJAX
 				}
 			})
 			.state('main.level2', {
-				url: '/:level1/:level2',
+				url: '/:lang/:level1/:level2',
 				controllerProvider: ['$stateParams', '$filter', 'ROUTE',
 					function($stateParams, $filter, ROUTE) {
 						var param1 = $stateParams.level1,
@@ -158,8 +157,6 @@ var app = angular.module('workshop', [
 							 tplFile = ($$util.isEmpty(param1) || $$util.isEmpty(param2)) ? 'home.html' : param1.toLowerCase() + '-' + param2.toLowerCase() + '.html',
 							 tplData = $templateCache.get(tplFile);
 
-						$log.debug('LEVEL 2:');
-
 						if (tplData === undefined) {
 							tplData = ROUTE.getTemplate(tplFile);
 
@@ -171,8 +168,10 @@ var app = angular.module('workshop', [
 						return tplData;
 					}
 				],
+				data: {
+				},
 				resolve: {
-					lazyLoading: ROUTE.resolve.lazyLoading
+					lazyDependencies: ROUTE.resolve.lazyDependencies
 				}
 			});
 		}

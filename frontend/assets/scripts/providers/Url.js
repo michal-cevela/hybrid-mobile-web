@@ -35,7 +35,7 @@ angular.module('Provider.Url', [])
 					 * @returns undefined
 					 */
 					redirect: function (url) {
-						$location.path(url).replace();
+						$location.path('/cz/' + url).replace();
 					}
 				};
 			}]

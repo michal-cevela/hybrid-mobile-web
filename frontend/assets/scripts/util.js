@@ -44,7 +44,7 @@ var $$util = (function() {
 
 		isEmpty: function(value) {
 			if (value == undefined) {
-				return true
+				return true;
 			} else {
 				return (value.length == 0);
 			}

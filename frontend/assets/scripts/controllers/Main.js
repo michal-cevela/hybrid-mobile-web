@@ -6,9 +6,12 @@
  * @version 1.0
  */
 angular.module('Ctrl.Main', [])
-	.controller('MainCtrl', ['$scope', '$location', '$window', '$filter', 'Url', 'User',
-		function($scope, $location, $window, $filter, Url, User) {
+	.controller('MainCtrl', ['$scope', '$location', '$window', '$filter', 'Url', 'User', 'Security',
+		function($scope, $location, $window, $filter, Url, User, Security) {
 			$log.debug('controllers/Main.js: The main controller has been initialized.');
+
+			$log.debug('SECURITY:');
+			$log.debug(Security);
 
 			$scope.User = User;
 			$scope.Url  = Url;
@@ -25,13 +28,26 @@ angular.module('Ctrl.Main', [])
 						toParams.level1,
 						toParams.level2,
 						toParams.level3
-					];
+					],
 
-					var title = params.filter(function(value, index) {
+					userRoles = toState.data.userRoles,
+
+					title = params.filter(function(value, index) {
 						return (angular.isDefined(value)) ? true : false;
 					}).join(": ");
 
 					$window.document.title = $filter('firstUpperCase')(title);
+/*
+					$log.debug('USER ROLES:');
+
+					if (userRoles.length > 0) {
+						$log.debug(userRoles[0]());
+						$scope.$broadcast(userRoles);
+					} else {
+						$log.error("Not allowed");
+						event.preventDefault();
+					}
+*/
 				}
 			);
 

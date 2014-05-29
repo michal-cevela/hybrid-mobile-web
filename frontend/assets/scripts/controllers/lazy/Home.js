@@ -12,9 +12,13 @@ window.$dependencies = {
 	directives: []
 };
 
+window.$ajax = [
+	'ajax.json'
+];
+
 $$util.getProvider('controller')
-	.register('HomeCtrl', ['$scope',
-		function ($scope) {
+	.register('HomeCtrl', ['$scope', 'AJAX',
+		function ($scope, AJAX) {
 			if (window.device) {
 				$scope.device = {
 					model   : window.device.model,
@@ -30,5 +34,9 @@ $$util.getProvider('controller')
 					uuid    : navigator.buildID
 				};
 			}
+
+			angular.forEach(AJAX, function(response) {
+				$log.debug(response.data.dbObjects[0]);
+			});
 		}
 	]);

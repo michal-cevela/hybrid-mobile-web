@@ -10,6 +10,13 @@ angular.module('Service.User', [])
 		var _signedIn = false;
 
 		return {
+			roles: {
+				all: '*',
+				admin: 'admin',
+				editor: 'editor',
+				guest: 'guest'
+			},
+			
 			signIn: function() {
 				_signedIn = true;
 			},

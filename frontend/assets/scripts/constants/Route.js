@@ -99,19 +99,8 @@ angular.module('Constant.Route', [])
 			 * Set a functionality for the Resolve block that is applicable within a route definition
 			 */
 			resolve: {
-				// Notice: HTTP requests using angular's $http or $resource service CAN be intercepted within this scope!
-				security: ['$q', '$location', 'Security',
-					function($q, $location, Security) {
-						var defer = $q.defer(),
-							 routePath = $location.$$path;
-
-						Security.hasAccess(defer);
-						return defer.promise;
-					}
-				],
-
-				lazyLoading: ['$q', '$stateParams', '$filter', '$state', 'CONFIG', 'ROUTE',
-					function($q, $stateParams, $filter, $state, CONFIG, ROUTE) {
+				lazyDependencies: ['$q', '$stateParams', '$filter', '$state', 'lazyLoading', 'CONFIG', 'ROUTE',
+					function($q, $stateParams, $filter, $state, lazyLoading, CONFIG, ROUTE) {
 						var defer = $q.defer(),
 							 ctrl = {
 								 dir: CONFIG.DIR.js + '/' + CONFIG.DIR.angular.controllers,
@@ -126,6 +115,7 @@ angular.module('Constant.Route', [])
 						}
 
 						if (ROUTE.hasLazyController(ctrl.file) == true) {
+							lazyLoading.setResolve();
 							defer.resolve('OK');
 						} else {
 							$$util.loadJScripts({
@@ -136,7 +126,7 @@ angular.module('Constant.Route', [])
 							}).then(
 								// Success
 								function(response) {
-									$log.debug('constants/Route.js: A lazy controller loaded...');
+									$log.debug('constants/Route.js: A lazy route-related controller has been loaded:');
 									$log.debug($$util.getStatus(response));
 
 									_routes.controllers.push(ctrl.file);
@@ -159,25 +149,29 @@ angular.module('Constant.Route', [])
 
 										$q.all(promises).then(
 											function(response) {
-												$log.debug("constants/Route.js: Lazy controller's dependencies loaded...");
+												$log.debug("constants/Route.js: Lazy route-related dependencies have been loaded:");
 												$log.debug($$util.getStatus(response));
+												lazyLoading.setResolve();
 												defer.resolve(response);
 											},
 											function(response) {
-												$log.error("constants/Route.js: One of the controller's dependencies failed...");
+												$log.error("constants/Route.js: One of the route-related dependencies has failed:");
 												$log.error($$util.getStatus(response));
+												lazyLoading.setReject();
 												defer.reject(response);
 											}
-										)
+										);
 										delete window.$dependencies;
 									} else {
+										lazyLoading.setResolve();
 										defer.resolve(response);
 									}
 								},
 								// Error
 								function(response) {
-									$log.error('constants/Route.js: Controller failed');
+									$log.error('constants/Route.js: A route-related controller has failed:');
 									$log.error($$util.getStatus(response));
+									lazyLoading.setReject();
 									defer.reject(response);
 								}
 							)
@@ -185,7 +179,55 @@ angular.module('Constant.Route', [])
 
 						return defer.promise;
 					} // end: function(...)
-				] // end: lazyController
+				], // end: lazyDependencies
+
+				AJAX: ['$q', '$http', 'lazyLoading',
+					function($q, $http, lazyLoading) {
+						return lazyLoading.getDefer().promise.then(
+							// onSuccess
+							function(response) {
+								$log.debug('constants/Route.js: resolve.AJAX -> ' + response);
+								$log.debug('constants/Route.js: resolve.AJAX -> scripts to be requested via AJAX:')
+								$log.debug(window.$ajax);
+
+								var requests = [];
+
+								if ($$util.isEmpty(window.$ajax) === false) {
+									angular.forEach(window.$ajax, function(value) {
+										requests.push($http.get(value));
+									});
+								}
+
+								return $q.all(requests).then(
+									// onSuccess
+									function(response) {
+										return response;
+									},
+									// onError
+									function(response) {
+										return [];
+									}
+								);
+							},
+							// onError
+							function(response) {
+								$log.debug('constants/Route.js: resolve.AJAX -> ' + response);
+								return [];
+							}
+						);
+					} // end: function(...)
+				], // end: AJAX
+
+				// Notice: HTTP requests using angular's $http or $resource service CAN be intercepted within this scope!
+				security: ['$q', '$location', 'Security',
+					function($q, $location, Security) {
+						var defer = $q.defer(),
+							routePath = $location.$$path;
+
+						Security.hasAccess(defer);
+						return defer.promise;
+					}
+				]
 			}
 		}
 	})());

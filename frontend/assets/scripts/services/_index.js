@@ -10,5 +10,6 @@ angular.module('Services', [
 	'Service.Books',
 	'Service.RouteInterceptor',
 	'Service.User',
-	'Service.Parser'
+	'Service.Parser',
+	'Service.lazyLoading'
 ]);

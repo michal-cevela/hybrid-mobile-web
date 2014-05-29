@@ -7,7 +7,7 @@
  */
 angular.module('Ctrl.Navbar', [])
 	.controller('NavbarCtrl', ['$scope', 'User',
-		function($scope, $location, User) {
+		function($scope, User) {
 			$scope.User = User;
 
 			$scope.links = [
